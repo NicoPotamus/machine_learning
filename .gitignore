@@ -1,0 +1,4 @@
+mushroom/mushrooms_clean.csv
+mushroom/mushrooms_missing_rows.csv
+mushroom/mushrooms.csv
+*.csv
