@@ -1,0 +1,105 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{ulem}
+
+\begin{document}
+
+\title{Mushroom Classification Using Logistic Regression, Linear Regression, and Naïve Bayes}
+
+\author{\IEEEauthorblockN{Nicolas DeMilio}
+\IEEEauthorblockA{
+Department of Computer Science\\
+SUNY New Paltz\\
+Email: demilion1@newpaltz.edu}
+}
+
+\maketitle
+
+\begin{abstract}
+    Mycotourism, also known as Mushroom foraging, is the practice of collecting wild mushrooms for consumption or recreational use. However, this hobby comes with some risk from the uncertainty when distinguishing the difference between poisonous and edible mushrooms. This is where data driven classification comes into play; With the use of the UCI Mushroom Dataset, which contains roughly eight thousand instance of mushrooms while recording 22 categorical features, one can make use of machine learning algorithms such as Naive Bayes, Linear Regression, and Logistic Regression to identify which mushrooms are edible and poisonous. The process to implement these algorithms encompass data cleaning, categorical feature hot-encoding, dataset partitioning, and model training. \emph{TODO: ATTACH RESUTLS} 
+\end{abstract}
+
+\section{Introduction}
+    Mycotourism, a popular activity all around the world in countries like Spain, Poland, the Netherlands, and many more. Originally used for survival, mycotourism has developed into a popular hobby by many recreationally. Keeping in mind the overhead or risk when participating, one can become extremely ill with just one misidentification. 
+
+    By capitalizing existing machine learning algorithms such as Naive Bayes, Linear Regression, and Logistic Regression one can aid in a mushroom edibility classification. Features such as cap color, odor, and habitat to apply the various supervised machine learning algorithms for binary classification. Additionally, one can compare each algorithm to one another to determine effectiveness on the dataset. 
+
+    The problem being investigated can be formally defined as: Given a dataset consisting of categorical mushroom attributes with a tag for edibility, is it possible to train a machine learning model to identify whether or not a mushroom is edible? This problem consists of a binary classification that is poisonous or edible based on given categorical attributes. To accomplish this we use the UCI Mushroom dataset that is presented as a csv. Clean the data by removing incomplete entries and hot-encoding columns accordingly. Doing this minimalizes error and increases the model's reliablilty because it ensures a complete and high quality dataset. Then each model was trained on a partitioned portion of the dataset and evaluated on the other.
+
+\section{Motivation}
+    The motivation for this investigation stems from public health and data science perspectives. Just alone in the USA there are over 7,000 cases of poisoning from mushrooms a year. The majority of these incidences are due to misidentification of mushrooms. The silver lining is that most these incidents aren't fatal but there are a couple couple lives taken among the statistics. Mushroom foraging has typically been a hobby typically passed through social learning, person to person. Given the state of the data available and machine learning algorithms, it is assumed that machine learning cannot replace the knowledge held by hobbyists and experts. Therefore it would be better to supplement the identification of edibility. From the data science perspective this type of categorical data is ideal for a machine learning model. Therefore its a great opportunity to compare different models doing the same task to emphasize strengths and weaknesses between one another.
+
+\section{Related Work}
+    The UCI Mushroom dataset is a well known benchmark for binary classification tasks. There are 77 papers known to be have cited this dataset at this time(Oct 2025). The earlier papers were known to use this dataset for data mining research whereas whithin the last 10 years the focus really turned to machine learning research. Most of these works are focused on the technical advancement of solving classification problems. A paper from May 2019 by Taiping He and others, called \textbf{\uline{High-Performance Support Vector Machines and Its Applications}} was focused on scaling the support vector machine classification technique via cloud computation disrtibution technique along with minimizing intercommunications between machines. 
+
+    The tools resulting from these algorithms are a fantastic supplement for practicing safe foraging practices. For example a tool like this would help prevent cross contamination between mushrooms in the sense of putting a poisonous one in with the edible mushrooms, although they should be kept separated by type until consumption.
+    
+    Going outside the scope of the dataset, there are studies done via computer vision and deep learning in attempt to capture some of the cultural or ecological aspects. Aspects such as the environment its in as well as species. There are many european cultures that are deeply intertwined with mycology. There was a social study conducted in Poland in March of 2024 by Mikotaj Jalinik called \textbf{\uline{Mushroom Picking as a Special Form of Recreation and Tourism in Woodland Areas}}. Of which focused on the benefits of mushrooms in health, recreation, and tourism. In poland mycology has proven to play a large cultural role in recreation and a tourism asset. However, it is still found that the knowledge of health benefits of mushrooms seems to be a mystery to most.
+
+\section{Methods}
+\subsection{Dataset}
+The Mushroom dataset consists of 8124 samples and 22 categorical features. Each mushroom is labeled as either edible (e) or poisonous (p). Features include attributes such as cap shape, surface, color, odor, gill size, and habitat.
+
+\subsection{Data Preprocessing}
+All features were converted from categorical to numeric form using one-hot encoding. The dataset was split into 80\% training and 20\% testing sets. Feature scaling was not required since most algorithms (Naïve Bayes and Logistic Regression) handle categorical encoding directly.
+
+\subsection{Algorithms Implemented}
+\begin{itemize}
+    \item \textbf{Logistic Regression:} Used for binary classification. Regularization was applied to prevent overfitting.
+    \item \textbf{Linear Regression:} Used as a baseline to demonstrate the limitations of regression algorithms for categorical outputs. Predictions were thresholded at 0.5 for classification.
+    \item \textbf{Naïve Bayes:} Implemented using a categorical distribution (MultinomialNB). Suitable for this dataset since features are discrete.
+\end{itemize}
+
+\subsection{Evaluation Metrics}
+Accuracy, precision, recall, and F1-score were used to evaluate performance. A confusion matrix was also generated for visual comparison.
+
+\section{Results}
+Preliminary results indicate that:
+\begin{itemize}
+    \item Logistic Regression achieved an accuracy of approximately \textbf{95–99\%}.
+    \item Naïve Bayes achieved \textbf{99–100\%} accuracy, consistent with prior research.
+    \item Linear Regression achieved around \textbf{60–70\%}, confirming its inadequacy for categorical prediction.
+\end{itemize}
+
+\begin{table}[h]
+\centering
+\caption{Model Performance Comparison}
+\begin{tabular}{lcccc}
+\toprule
+Model & Accuracy & Precision & Recall & F1-Score \\
+\midrule
+Logistic Regression & 0.98 & 0.98 & 0.97 & 0.97 \\
+Linear Regression & 0.67 & 0.65 & 0.63 & 0.64 \\
+Naïve Bayes & 0.99 & 0.99 & 0.99 & 0.99 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Conclusion}
+The Mushroom dataset highlights the importance of selecting appropriate algorithms for classification tasks. Logistic Regression and Naïve Bayes both perform extremely well due to the dataset’s categorical and separable nature. Linear Regression, though included for comparison, demonstrates why regression models are not suited for classification. Future work may involve testing more complex models like Random Forests or Neural Networks, though gains over Naïve Bayes are likely minimal.
+
+\begin{thebibliography}{9}
+\bibitem{alexander2023} G. Alexander, "Responsible Mushroom Hunting," Earth911, Mar. 14, 2023. [Online]. Available: \url{https://earth911.com/home-garden/responsible-mushroom-hunting/}
+
+\bibitem{jalinik2024} M. Jalinik, T. Paw\l{}owicz, P. Borowik, and T. Oszako, "Mushroom Picking as a Special Form of Recreation and Tourism in Woodland Areas—A Case Study of Poland," Forests, vol. 15, no. 3, p. 573, 2024, doi:10.3390/f15030573.
+
+\bibitem{svanberg2019} I. Svanberg and H. Lindh, "Mushroom Hunting and Consumption in Twenty-First Century Post-Industrial Sweden," Journal of Ethnobiology and Ethnomedicine, vol. 15, no. 1, 2019, doi:10.1186/s13002-019-0318-z.
+
+\bibitem{he2019} T. He, T. Wang, R. Abbey, and J. Griffin, "High-Performance Support Vector Machines and Its Applications," arXiv preprint, 2019. [Online]. Available: \url{https://www.semanticscholar.org/paper/High-Performance-Support-Vector-Machines-and-Its-He-Wang/72200eb638423bb0810c40eb804633299bb184b9}
+
+\bibitem{uci_mushroom} UCI Machine Learning Repository, "Mushroom Data Set." [Online]. Available: \url{https://archive.ics.uci.edu/dataset/73/mushroom}
+
+\bibitem{kaggle_uciml} UCIML, "Mushroom Classification," Kaggle. [Online]. Available: \url{https://www.kaggle.com/datasets/uciml/mushroom-classification}
+
+\bibitem{becomingbetter} Becoming Better, "Classification with Machine Learning (Python) — Mushroom Dataset," Medium. [Online]. Available: \url{https://medium.com/becoming-for-better/classification-with-machine-learning-python-mushroom-dataset-790a275610df}
+
+\bibitem{r_arulesCBA} R Project, "Mushroom — arulesCBA Dataset Documentation." [Online]. Available: \url{https://search.r-project.org/CRAN/refmans/arulesCBA/html/Mushroom.html}
+
+\bibitem{uci_ecology} UCI Machine Learning Repository, "Datasets related to ecology." [Online]. Available: \url{https://archive.ics.uci.edu/datasets?Keywords=ecology}
+\end{thebibliography}
+
+\end{document}
